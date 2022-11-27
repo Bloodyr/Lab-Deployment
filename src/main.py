@@ -67,7 +67,7 @@ def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)
     return crud.create_product(db=db, product=product)
 
 
-@app.post("/products/{product_id}/orders/", response_model=schemas.Order)
+@app.post("/products/{product_id}/orders/{shop_id}", response_model=schemas.Order)
 def create_order_for_product_shop(
     shop_id: int, product_id: int, order: schemas.OrderCreate, db: Session = Depends(get_db)
 ):
