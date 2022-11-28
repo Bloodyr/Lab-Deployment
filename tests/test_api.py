@@ -202,9 +202,6 @@ def test_get_orders():
     assert data[0]["amount"] == 1
 
 def test_order_not_found():
-    """
-    Проверка случая, если пользователь с таким id отсутствует в БД
-    """
     response = client.get("/orders/3")
     assert response.status_code == 404, response.text
     data = response.json()
