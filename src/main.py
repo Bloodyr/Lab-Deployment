@@ -11,11 +11,11 @@ app = FastAPI()
 
 def get_db():
 
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+    db = SessionLocal()# pragma: no cover
+    try:# pragma: no cover
+        yield db# pragma: no cover
+    finally:# pragma: no cover
+        db.close()# pragma: no cover
 
 
 @app.get("/shops/", response_model=list[schemas.Shop])
@@ -92,12 +92,14 @@ def read_delivery_by_id(delivery_id: int, db: Session = Depends(get_db)):
     return db_shop
 
 
-@app.post("/orders/{order_id}/deliveries/", response_model=schemas.Order)
-def create_delivery_for_order(
-    order_id: int, delivery: schemas.DeliveryCreate, db: Session = Depends(get_db)
-):
 
-    return crud.create_order_delivery(db=db, delivery=delivery,  order_id=order_id)
+@app.post("/orders/{order_id}/deliveries/", response_model=schemas.Delivery)
+def create_delivery_for_order(
+    order_id: int, delivery: schemas.DeliveryCreate, db: Session = Depends(get_db)):
+    db_delivery = crud.get_delivery_by_order_id(db, order_id=order_id)
+    if db_delivery:
+        raise HTTPException(status_code=404, detail="Delivery order id already exist")
+    return crud.create_order_delivery(db=db,delivery=delivery, order_id=order_id)
 
 
 @app.get("/orders/", response_model=list[schemas.Order])

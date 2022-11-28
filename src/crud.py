@@ -50,13 +50,13 @@ def get_product_by_id(db:Session, product_id: int):
 def get_delivery_by_id(db:Session, delivery_id: int):
     return db.query(models.Delivery).filter(models.Delivery.id==delivery_id).first()
 
+def get_delivery_by_order_id(db: Session, order_id: int):
+    return db.query(models.Delivery).filter(models.Delivery.order_id == order_id).first()
+
 
 
 def get_product_by_name(db: Session, product_name: str):
     return db.query(models.Product).filter(models.Product.product_name == product_name).first()
-
-def get_product_by_price(db: Session, price: int):
-    return db.query(models.Product).filter(models.Product.price == price).first()
 
 def get_shop_by_email(db: Session, email: str):
     return db.query(models.Shop).filter(models.Shop.email == email).first()
