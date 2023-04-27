@@ -30,7 +30,7 @@ jobs:
         run: pytest
         # Для успешного запуска тестов необходимо в переменную окружения DATABASE_URL записать корректную строку подключения к любой БД
         env:
-          DATABASE_URL: sqlite:///./sqlite.db
+          DATABASE_URL: sqlite:///./sqlite_base.db
   # Задача развертывания
   deploy:
     name: Deploy to server
