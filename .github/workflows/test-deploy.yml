@@ -74,4 +74,4 @@ jobs:
         run: ssh yandex_server 'sudo docker-compose -f project/docker-compose.yml build'
         # Запускаем контейнеры
       - name: Run containers
-        run: ssh yandex_server 'sudo docker-compose -f project/docker-compose.yml up -d
+        run: ssh yandex_server 'sudo docker-compose -f project/docker-compose.yml up -d'
